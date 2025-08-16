@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HIBB AI - Coming Soon</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0d0d0d, #000);
+      color: #fff;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    header {
+      padding: 60px 20px 20px;
+    }
+
+    h1 {
+      font-size: 3.5em;
+      margin: 0;
+      color: #00d4ff;
+      text-shadow: 0 0 10px #00d4ff, 0 0 20px #00aacc, 0 0 40px #0099cc;
+      animation: neonPulse 2s infinite alternate;
+    }
+
+    h2 {
+      font-weight: 400;
+      margin: 15px 0 40px;
+      font-size: 1.3em;
+      color: #ff5c93;
+      text-shadow: 0 0 10px #ff5c93, 0 0 20px #ff2a70, 0 0 40px #ff1a60;
+      animation: neonPulse2 2.5s infinite alternate;
+    }
+
+    #countdown {
+      font-size: 2em;
+      margin-bottom: 40px;
+      color: #00ffae;
+      text-shadow: 0 0 10px #00ffae, 0 0 20px #00cc88;
+      animation: neonPulse3 1.8s infinite alternate;
+    }
+
+    .features {
+      margin: 40px auto;
+      max-width: 700px;
+    }
+
+    .features p {
+      font-size: 1.2em;
+      margin: 10px 0;
+      text-shadow: 0 0 8px #fff;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 30px;
+      background: #000;
+      color: #00d4ff;
+      border: 2px solid #00d4ff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: 0.3s;
+      text-shadow: 0 0 10px #00d4ff, 0 0 20px #0099cc;
+      box-shadow: 0 0 10px #00d4ff, 0 0 30px #0099cc;
+    }
+
+    .buttons a:hover {
+      background: #00d4ff;
+      color: #000;
+      box-shadow: 0 0 20px #00d4ff, 0 0 40px #0099cc;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: #111;
+      font-size: 0.9em;
+    }
+
+    footer a {
+      color: #ff5c93;
+      text-decoration: none;
+      font-weight: bold;
+      text-shadow: 0 0 10px #ff5c93, 0 0 20px #ff2a70;
+      animation: neonPulse2 2s infinite alternate;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+
+    /* Animations néon */
+    @keyframes neonPulse {
+      from { text-shadow: 0 0 5px #00d4ff, 0 0 15px #0099cc; }
+      to { text-shadow: 0 0 20px #00d4ff, 0 0 40px #00aacc; }
+    }
+    @keyframes neonPulse2 {
+      from { text-shadow: 0 0 5px #ff5c93, 0 0 15px #ff2a70; }
+      to { text-shadow: 0 0 20px #ff5c93, 0 0 40px #ff1a60; }
+    }
+    @keyframes neonPulse3 {
+      from { text-shadow: 0 0 5px #00ffae, 0 0 15px #00cc88; }
+      to { text-shadow: 0 0 20px #00ffae, 0 0 40px #00cc99; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HIBB AI</h1>
+    <h2>L’IA qui crée des images et de vrais mangas en PDF</h2>
+    <div id="countdown">Lancement dans ...</div>
+  </header>
+
+  <section class="features">
+    <p>🚀 Jusqu’à <strong>170 images par jour</strong>, soit environ <strong>5 000 par mois</strong>.</p>
+    <p>📖 Génère de vrais <strong>mangas complets en PDF</strong>.</p>
+  </section>
+
+  <div class="buttons">
+    <a href="#">Voir la démo</a>
+  </div>
+
+  <footer>
+    <p>© <span id="year"></span> HIBB AI. Tous droits réservés.</p>
+    <p>Retrouvez-nous sur <a href="https://www.tiktok.com/@hibbi.ai" target="_blank">TikTok 🎵</a></p>
+  </footer>
+
+  <script>
+    // Compte à rebours
+    const TARGET = new Date("2025-12-01T12:00:00Z").getTime();
+    const countdown = document.getElementById("countdown");
+    setInterval(() => {
+      const now = new Date().getTime();
+      const diff = TARGET - now;
+      if (diff <= 0) {
+        countdown.innerHTML = "C'est parti 🚀 !";
+        return;
+      }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+      const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+      const seconds = Math.floor((diff % (1000*60)) / 1000);
+      countdown.innerHTML = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+
+    // Année auto
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
