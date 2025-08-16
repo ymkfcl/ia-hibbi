@@ -1,54 +1,247 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIBB AI - Coming Soon</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin:0;
+    font-family:'Orbitron', sans-serif;
+    background:#050505;
+    color:#fff;
+    text-align:center;
+    overflow-x:hidden;
+  }
+  canvas#bg {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-1;
+    background: radial-gradient(circle at center, #0a0a0a, #000);
+  }
+
+  header { padding: 70px 20px 20px; }
+  h1 {
+    font-size:4em;
+    margin:0;
+    color:#00f0ff;
+    text-shadow:0 0 10px #00f0ff,0 0 20px #00aaff,0 0 40px #0088ff;
+    animation:flicker 2s infinite alternate;
+  }
+  h2 {
+    font-weight:400;
+    margin:20px 0 50px;
+    font-size:1.5em;
+    color:#ff2a6d;
+    text-shadow:0 0 8px #ff2a6d,0 0 20px #ff0055,0 0 40px #ff0044;
+    animation:flicker2 3s infinite alternate;
+  }
+  #countdown {
+    font-size:2.2em;
+    margin-bottom:50px;
+    color:#00ffae;
+    text-shadow:0 0 10px #00ffae,0 0 20px #00cc88;
+    animation:pulse 2s infinite alternate;
+  }
+
+  .features {
+    margin:40px auto;
+    max-width:700px;
+    background: rgba(0,0,0,0.3);
+    padding:20px;
+    border-radius:10px;
+    border:1px solid rgba(0,240,255,0.3);
+    backdrop-filter: blur(4px);
+  }
+  .features p { font-size:1.3em; margin:15px 0; text-shadow:0 0 8px #fff; }
+
+  .logos {
+    margin:40px 0;
+    display:flex;
+    justify-content:center;
+    gap:50px;
+  }
+  .logos img { height:80px; filter: drop-shadow(0 0 15px #00f0ff); }
+
+  .futur-btn {
+    position: relative;
+    width: 180px; height: 45px;
+    border-radius: 30px;
+    background-color:white;
+    border:none;
+    overflow:hidden;
+    cursor:pointer;
+    font-family:'Orbitron', sans-serif;
+    margin:auto;
+    display:block;
+    margin-bottom:50px;
+  }
+  .futur-btn .text1 { font-size:13px; font-weight:600; display:block; margin-top:6px; }
+  .futur-btn .text2 {
+    position:absolute; top:50%; left:-80px; transform:translateY(-50%);
+    font-weight:700; font-size:14px; color:white; transition:0.5s;
+  }
+  .futur-btn .icon {
+    position:absolute; top:0; left:0; width:180px; height:45px; border-radius:30px;
+    background:#111; transition:0.5s; z-index:-1;
+  }
+  .futur-btn:hover .icon { transform:translateX(180px); }
+  .futur-btn:hover .text2 { transform:translateX(180px); }
+
+  .contact {
+    margin:50px auto;
+    max-width:500px;
+    background:rgba(0,0,0,0.3);
+    padding:20px;
+    border-radius:10px;
+    border:1px solid rgba(0,240,255,0.3);
+    backdrop-filter: blur(4px);
+  }
+  .contact h3 { color:#00f0ff; text-shadow:0 0 8px #00f0ff; margin-bottom:20px; }
+  .contact input, .contact textarea, .contact button {
+    width:100%; padding:10px; margin-bottom:10px; border-radius:5px; border:none; font-family:'Orbitron', sans-serif;
+  }
+  .contact button { background:#00f0ff; color:#000; font-weight:bold; cursor:pointer; }
+
+  footer {
+    margin-top:60px; padding:20px;
+    background: rgba(20,20,20,0.8);
+    border-top:1px solid rgba(255,255,255,0.1);
+    font-size:0.95em;
+  }
+  footer a { color:#ff5c93; text-decoration:none; font-weight:bold; text-shadow:0 0 10px #ff5c93,0 0 20px #ff2a70; animation:flicker2 2.5s infinite alternate; }
+  footer a:hover { color:#fff; text-decoration:underline; }
+
+  @keyframes flicker {
+    0% { opacity:1; }
+    50% { opacity:0.9; text-shadow:0 0 20px #00f0ff,0 0 40px #00aaff; }
+    100% { opacity:1; text-shadow:0 0 30px #00f0ff,0 0 60px #00aaff; }
+  }
+  @keyframes flicker2 {
+    0% { opacity:1; }
+    50% { opacity:0.85; text-shadow:0 0 15px #ff2a6d,0 0 30px #ff0055; }
+    100% { opacity:1; text-shadow:0 0 25px #ff2a6d,0 0 50px #ff0044; }
+  }
+  @keyframes pulse {
+    from { text-shadow:0 0 5px #00ffae,0 0 15px #00cc88; }
+    to { text-shadow:0 0 25px #00ffae,0 0 50px #00cc99; }
+  }
+</style>
+</head>
 <body>
-  <canvas id="bg"></canvas>
 
-  <header>
-    <h1>HIBB AI</h1>
-    <h2>L’IA qui crée des images et de vrais mangas en PDF</h2>
-    <div id="countdown">Lancement dans ...</div>
-  </header>
+<canvas id="bg"></canvas>
 
-  <section class="features">
-    <p>🚀 Jusqu’à <strong>170 images par jour</strong>, soit environ <strong>5 000 par mois</strong>.</p>
-    <p>📖 Génère de vrais <strong>mangas complets en PDF</strong>.</p>
-  </section>
+<header>
+  <h1>HIBB AI</h1>
+  <h2>L’IA qui crée des images et de vrais mangas en PDF</h2>
+  <div id="countdown">Lancement dans ...</div>
+</header>
 
-  <section class="logos" style="margin: 40px 0; display: flex; justify-content: center; gap: 50px;">
-    <img src="ChatGPT_Image_16_août_2025__11_42_40-removebg-preview.png" alt="Logo HIBB AI" style="height:80px; filter: drop-shadow(0 0 15px #00f0ff);">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok" style="height:80px; filter: drop-shadow(0 0 15px #ff0055);">
-  </section>
+<section class="features">
+  <p>🚀 Jusqu’à <strong>170 images par jour</strong>, soit environ <strong>5 000 par mois</strong>.</p>
+  <p>📖 Génère de vrais <strong>mangas complets en PDF</strong>.</p>
+</section>
 
-  <!-- Bouton TikTok futuriste -->
-  <div style="display: flex; justify-content: center; margin-bottom:50px;">
-    <button class="futur-btn">
-      <span class="text1">Retrouvez-nous sur</span>
-      <span class="text2">TikTok</span>
-      <span class="icon"></span>
-    </button>
-  </div>
+<section class="logos">
+  <img src="https://i.imgur.com/9v1XoEz.png" alt="HIBB AI Logo">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/TikTok_logo.svg" alt="TikTok Logo">
+</section>
 
-  <footer>
-    <p>© <span id="year"></span> HIBB AI. Tous droits réservés.</p>
-  </footer>
+<button class="futur-btn" onclick="window.open('https://www.tiktok.com/@hibbi.ai','_blank')">
+  <span class="text1">Retrouvez-nous sur</span>
+  <span class="text2">TikTok</span>
+  <span class="icon"></span>
+</button>
 
-  <style>
-    body {
-      margin:0; font-family:'Orbitron', sans-serif; background:#050505; color:#fff; text-align:center; overflow:hidden;
-    }
-    h1 {font-size:4em; color:#00f0ff; text-shadow:0 0 10px #00f0ff,0 0 20px #00aaff;}
-    h2 {font-size:1.5em; color:#ff2a6d; text-shadow:0 0 8px #ff2a6d,0 0 20px #ff0055;}
-    #countdown {font-size:2.2em; color:#00ffae; text-shadow:0 0 10px #00ffae,0 0 20px #00cc88;}
-    .features {margin:40px auto; max-width:700px; background:rgba(0,0,0,0.3); padding:20px; border-radius:10px; border:1px solid rgba(0,240,255,0.3); backdrop-filter: blur(4px);}
-    .features p {font-size:1.3em; margin:15px 0;}
-    footer {margin-top:60px; padding:20px; background:rgba(20,20,20,0.8);}
-    
-    /* Bouton futuriste */
-    .futur-btn {
-      position: relative; width:180px; height:45px; border-radius:30px; background-color:white; border:none; overflow:hidden; cursor:pointer; font-family:'Orbitron', sans-serif;
-    }
-    .futur-btn .text1 {font-size:13px; font-weight:600; display:block; margin-top:6px;}
-    .futur-btn .text2 {position:absolute; top:50%; left:-80px; transform:translateY(-50%); font-weight:700; font-size:14px; color:white; transition:0.5s;}
-    .futur-btn .icon {position:absolute; top:0; left:0; width:180px; height:45px; border-radius:30px; background:#111; transition:0.5s; z-index:-1;}
-    .futur-btn:hover .icon {transform:translateX(180px);}
-    .futur-btn:hover .text2 {transform:translateX(180px);}
-  </style>
+<section class="contact">
+  <h3>Devenir beta testeur</h3>
+  <form id="betaForm">
+    <input type="text" name="name" placeholder="Votre nom" required>
+    <input type="email" name="email" placeholder="Votre e-mail" required>
+    <textarea name="message" placeholder="Pourquoi voulez-vous devenir beta testeur ?" rows="4"></textarea>
+    <button type="submit">Envoyer</button>
+  </form>
+  <p id="formMsg" style="color:#00ffae; margin-top:10px;"></p>
+</section>
+
+<footer>
+  <p>© <span id="year"></span> HIBB AI. Tous droits réservés.</p>
+</footer>
+
+<script>
+  // Countdown
+  const TARGET = new Date("2025-09-03T12:00:00Z").getTime();
+  const countdown = document.getElementById("countdown");
+  setInterval(() => {
+    const now = new Date().getTime();
+    const diff = TARGET - now;
+    if(diff <=0){ countdown.innerHTML="C'est parti 🚀 !"; return; }
+    const days = Math.floor(diff/(1000*60*60*24));
+    const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((diff%(1000*60))/1000);
+    countdown.innerHTML=`${days}j ${hours}h ${minutes}m ${seconds}s`;
+  },1000);
+
+  // Auto year
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Animated particles background
+  const canvas = document.getElementById("bg");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  const particles = Array.from({length:80}, ()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*2,
+    dx:(Math.random()-0.5)*0.5,
+    dy:(Math.random()-0.5)*0.5,
+    color:["#00f0ff","#ff2a6d","#00ffae"][Math.floor(Math.random()*3)]
+  }));
+  function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle=p.color;
+      ctx.shadowBlur=15;
+      ctx.shadowColor=p.color;
+      ctx.fill();
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width) p.dx*=-1;
+      if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+  window.addEventListener("resize", ()=>{
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+  });
+
+  // Beta tester form
+  const form = document.getElementById("betaForm");
+  const msg = document.getElementById("formMsg");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = form.name.value;
+    const email = form.email.value;
+    const message = form.message.value;
+    const to = "yumz.help" + "@" + "gmail.com";
+    const subject = encodeURIComponent("Demande Beta Testeur");
+    const body = encodeURIComponent(`Nom: ${name}\nEmail: ${email}\nMessage: ${message}`);
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    msg.textContent = "Merci ! Votre demande a été préparée dans votre e-mail.";
+    form.reset();
+  });
+</script>
+
 </body>
+</html>
